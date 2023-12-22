@@ -1,1 +1,0 @@
-// Routers/v1/exampleRoute

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { StatusCodes } from 'http-status-codes'
-// import { env } from '~/config/environment'
+import { env } from '~/config/environment'
 
 // Middleware centalized error handling
 export const errorHandlingMiddleware = (err, req, res, next) => {
@@ -16,8 +16,9 @@ export const errorHandlingMiddleware = (err, req, res, next) => {
     stack: err.stack
   }
 
-  // Chỉ khi môi trường là DEV thì mới trả về Stack Trace để debug dễ dàng hơn, còn không thì xóa đi.
-  // if (env.BUILD_MODE !== 'dev') delete responseError.stack
+  // Only if the environment is DEV will Stack Trace be returned for easier debugging, otherwise it will be deleted
+  console.log('BUILD_MODE: ', env.BUILD_MODE)
+  if (env.BUILD_MODE !== 'dev') delete responseError.stack
 
   // console.error(responseError)
 

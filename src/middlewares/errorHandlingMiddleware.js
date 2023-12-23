@@ -17,7 +17,6 @@ export const errorHandlingMiddleware = (err, req, res, next) => {
   }
 
   // Only if the environment is DEV will Stack Trace be returned for easier debugging, otherwise it will be deleted
-  console.log('BUILD_MODE: ', env.BUILD_MODE)
   if (env.BUILD_MODE !== 'dev') delete responseError.stack
 
   // console.error(responseError)

@@ -47,7 +47,6 @@ const findOneById = async (id) => {
 
 const getDetails = async (id) => {
   try {
-    // return await GET_DB().collection(BOARD_COLLECTION_NAME).findOne({ _id: new ObjectId(id) })
     const result = await GET_DB().collection(BOARD_COLLECTION_NAME).aggregate([
       { $match: {
         _id: new ObjectId(id),
@@ -66,7 +65,7 @@ const getDetails = async (id) => {
         as: 'cards'
       } }
     ]).toArray()
-    return result[0] || {}
+    return result[0] || null
   } catch (error) {
     throw new Error(error)
   }

@@ -1,6 +1,6 @@
 // Domains are allowed to access Server resources
 export const WHITELIST_DOMAINS = [
-  'https://endearing-halva-805bd2.netlify.app/'
+  'https://endearing-halva-805bd2.netlify.app'
   // 'http://localhost:5173'
 ]
 

@@ -88,6 +88,20 @@ const pushColumnOderIds = async (column) => {
   }
 }
 
+const pullColumnOderIds = async (column) => {
+  try {
+    const result = await GET_DB().collection(BOARD_COLLECTION_NAME).findOneAndUpdate(
+      { _id: new ObjectId(column.boardId) },
+      { $pull: { columnOrderIds: new ObjectId(column._id) } },
+      { returnDocument: 'after' }
+    )
+
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const update = async (boardId, updateData) => {
   try {
     // Filter which fields do not allow updates
@@ -121,5 +135,6 @@ export const boardModel = {
   findOneById,
   getDetails,
   pushColumnOderIds,
+  pullColumnOderIds,
   update
 }

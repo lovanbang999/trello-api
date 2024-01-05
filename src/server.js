@@ -24,9 +24,18 @@ const START_SERVER = () => {
   // Middleware centalized error handling
   app.use(errorHandlingMiddleware)
 
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
-    console.log(`Hello ${env.AUTHOR}, I am running at http://${ env.APP_HOST }:${ env.APP_PORT }/`)
-  })
+  // Production Environment (Support now is Render.com)
+  if (env.BUILD_MODE === 'production') {
+    app.listen(process.env.PORT, () => {
+      console.log(`PRODUCTION: Hello ${env.AUTHOR}, Back-end Server is running successfully at Port: ${process.env.PORT}`)
+    })
+  } else {
+    // Dev Environment
+    app.listen(env.LOCAL_DEV_APP_PORT, env.LOCAL_DEV_APP_HOST, () => {
+      console.log(`LOCAL DEV: Hello ${env.AUTHOR}, I am running at http://${ env.LOCAL_DEV_APP_HOST }:${ env.LOCAL_DEV_APP_PORT }/`)
+    })
+  }
+
 
   exitHook(() => {
     CLOSE_DB()
